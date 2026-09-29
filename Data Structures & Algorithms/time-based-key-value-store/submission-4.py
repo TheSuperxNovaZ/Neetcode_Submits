@@ -1,0 +1,24 @@
+class TimeMap:
+    def __init__(self):
+        self.master = {}
+    def set(self, key: str, value: str, timestamp: int) -> None:
+        if not key in self.master:
+            self.master[key] = []
+        self.master[key].append((timestamp, value))
+    def get(self, key: str, timestamp: int) -> str:
+        if not key in self.master:
+            return ""
+        values = self.master[key]
+        left = 0
+        right = len(values) - 1
+        result = ""
+        while left<=right:
+            mid = (left+right)//2
+            if values[mid][0]<=timestamp:
+                result = values[mid][1]
+                left = mid + 1
+            else:
+                right = mid - 1
+        return result
+
+        
